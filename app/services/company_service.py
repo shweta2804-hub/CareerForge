@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from app.repositories.company_repository import CompanyRepository
 from app.schemas.company import CompanyCreate, CompanyUpdate
+from app.models.company import Company
 from typing import Optional, Dict, Any, List
 
 
