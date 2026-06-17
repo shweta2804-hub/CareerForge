@@ -17,7 +17,7 @@ pydantic==2.6.1
 pydantic-settings==2.2.1
 
 # Cloud Storage
-cloudinary==1.40.1
+cloudinary==1.44.2
 
 # Email
 fastapi-mail==1.4.1
