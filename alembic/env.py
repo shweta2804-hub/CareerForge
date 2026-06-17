@@ -8,10 +8,6 @@ from pathlib import Path
 # Add the parent directory to sys.path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from app.core.config import settings
-from app.database.connection import Base
-from app.models import user, student, company, placement_drive, application, assessment
-
 # this is the Alembic Config object
 config = context.config
 
@@ -19,8 +15,19 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Set the sqlalchemy.url from settings
-config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+# Import models for autogenerate support
+# We import settings only if env vars are available (for online migrations on Render)
+# For offline/autogenerate, we just need the models registered with Base.metadata
+try:
+    from app.core.config import settings
+    config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+except Exception:
+    # Settings not available (e.g., running autogenerate locally without .env)
+    # Use the URL from alembic.ini instead
+    pass
+
+from app.database.connection import Base
+from app.models import user, student, company, placement_drive, application, assessment
 
 # add your model's MetaData object here for 'autogenerate' support
 target_metadata = Base.metadata
