@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { LayoutDashboard, Building2, Calendar, FileText, Users, TrendingUp, ArrowRight } from 'lucide-react'
+import { Building2, Calendar, FileText, Users, TrendingUp, ArrowRight } from 'lucide-react'
 
 interface Stats {
   totalStudents?: number

@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 
 interface LayoutProps {
-  children: ReactNode
+  children?: ReactNode
 }
 
 export default function Layout({ children }: LayoutProps) {

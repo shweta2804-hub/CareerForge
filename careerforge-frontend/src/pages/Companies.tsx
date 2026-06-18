@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Plus, Search, Building2, Edit, Trash2 } from 'lucide-react'
+import { Plus, Search, Building2, Trash2 } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 interface Company {

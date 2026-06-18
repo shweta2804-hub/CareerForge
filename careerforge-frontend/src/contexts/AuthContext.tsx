@@ -30,7 +30,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'))
-  const [refreshToken, setRefreshToken] = useState<string | null>(localStorage.getItem('refreshToken'))
+  const [, setRefreshToken] = useState<string | null>(localStorage.getItem('refreshToken'))
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

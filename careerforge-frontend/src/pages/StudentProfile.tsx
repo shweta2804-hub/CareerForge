@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { User, Mail, Phone, MapPin, GraduationCap, FileText, Upload } from 'lucide-react'
+import { User, Mail, GraduationCap, FileText, Upload } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 interface StudentProfile {

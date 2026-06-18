@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ClipboardList, CheckCircle, XCircle } from 'lucide-react'
+import { ClipboardList } from 'lucide-react'
 
 interface Assessment {
   id: number

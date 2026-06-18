@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FileText, ExternalLink } from 'lucide-react'
+import { FileText } from 'lucide-react'
 
 interface Application {
   id: number
