@@ -1,245 +1,298 @@
-# CareerForge
+# CareerForge - Placement Portal
 
-Cloud-based placement and career readiness platform for colleges and training institutes.
+A modern, full-stack placement portal built with React, TypeScript, and FastAPI. CareerForge streamlines the placement process for students, companies, and administrators.
 
-## Features
+![Status](https://img.shields.io/badge/status-production-success)
+![Backend](https://img.shields.io/badge/backend-online-success)
+![Frontend](https://img.shields.io/badge/frontend-ready-blue)
 
-- **Authentication & Authorization**: JWT-based auth with role-based access (Admin/Student)
-- **Student Management**: Profile management, resume upload, skills tracking
-- **Company Management**: Company profiles, requirements, and job descriptions
-- **Placement Drives**: Create and manage placement drives with status tracking
-- **Application System**: Apply to drives, track status, and manage applications
-- **Eligibility Engine**: Automatic eligibility checking based on CGPA and skills
-- **Skill Match Engine**: Dynamic skill matching with percentage calculation
-- **Placement Readiness Score**: Calculated score (0-100) with category classification
-- **Assessment Module**: Create assessments and record student scores
-- **Analytics Dashboard**: Comprehensive placement statistics and insights
-- **Email Notifications**: Automated emails for drives, applications, and status updates
-- **Resume Management**: Cloudinary-based PDF resume storage
+---
 
-## Architecture
+## 📋 Table of Contents
 
-- **Clean Architecture**: Separation of concerns with repositories, services, and endpoints
-- **Tech Stack**: FastAPI, SQLAlchemy 2.0, PostgreSQL, Pydantic v2
-- **Pattern**: Repository pattern, Service layer pattern, Dependency injection
-- **API Versioning**: `/api/v1` prefix for all endpoints
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Quick Start](#quick-start)
+- [Documentation](#documentation)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
 
-## Project Structure
+---
+
+## ✨ Features
+
+### For Students
+- 📝 **Profile Management** - Create and update student profiles
+- 📄 **Resume Upload** - Upload and manage resumes
+- 🏢 **Browse Companies** - View registered companies
+- 📅 **Placement Drives** - Apply for campus drives
+- 📊 **Application Tracking** - Track application status
+- 📈 **Analytics** - View placement statistics
+
+### For Administrators
+- 🏢 **Company Management** - Add and manage companies
+- 📅 **Drive Management** - Create and manage placement drives
+- 👥 **Student Management** - View and manage students
+- 📊 **Analytics Dashboard** - Comprehensive analytics
+- ✅ **Application Review** - Review and process applications
+
+### For Companies
+- 📋 **Drive Posting** - Post placement drives
+- 👀 **Application Review** - Review student applications
+- 📊 **Analytics** - View drive statistics
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- **Framework**: FastAPI (Python)
+- **Database**: PostgreSQL (Neon)
+- **ORM**: SQLAlchemy 2.0
+- **Authentication**: JWT with OAuth2
+- **Migrations**: Alembic
+- **API Docs**: Swagger/OpenAPI
+
+### Frontend
+- **Framework**: React 18
+- **Language**: TypeScript 5
+- **Build Tool**: Vite 5
+- **Styling**: Tailwind CSS 3
+- **Forms**: React Hook Form + Zod
+- **Routing**: React Router v6
+- **HTTP Client**: Axios
+- **Icons**: Lucide React
+- **Notifications**: React Hot Toast
+
+### Infrastructure
+- **Hosting**: Render
+- **Database**: Neon PostgreSQL
+- **Storage**: Cloudinary (planned)
+- **CI/CD**: GitHub Actions
+
+---
+
+## 📁 Project Structure
 
 ```
-careerforge/
-├── app/
-│   ├── api/v1/endpoints/    # API route handlers
-│   ├── core/                # Configuration and security
-│   ├── database/            # Database connection
-│   ├── models/              # SQLAlchemy models
-│   ├── schemas/             # Pydantic schemas
-│   ├── repositories/        # Data access layer
-│   ├── services/            # Business logic
-│   ├── dependencies/        # FastAPI dependencies
-│   ├── middleware/          # Custom middleware
-│   └── main.py              # Application entry point
-├── alembic/                 # Database migrations
-├── tests/                   # Test files
-└── .github/workflows/       # CI/CD pipelines
+CareerForge/
+├── backend/                    # Backend application
+│   ├── app/
+│   │   ├── api/v1/            # API endpoints
+│   │   ├── models/            # SQLAlchemy models
+│   │   ├── schemas/           # Pydantic schemas
+│   │   ├── services/          # Business logic
+│   │   ├── repositories/      # Data access layer
+│   │   ├── core/              # Configuration
+│   │   ├── database/          # Database connection
+│   │   └── middleware/        # Custom middleware
+│   ├── alembic/               # Database migrations
+│   ├── tests/                 # Backend tests
+│   ├── requirements.txt       # Python dependencies
+│   └── .env.example           # Environment template
+│
+├── frontend/                   # Frontend application
+│   └── careerforge-frontend/
+│       ├── src/
+│       │   ├── pages/         # Page components
+│       │   ├── components/    # Reusable components
+│       │   ├── contexts/      # React contexts
+│       │   ├── services/      # API services
+│       │   └── index.css      # Global styles
+│       ├── package.json       # Node dependencies
+│       └── render.yaml        # Render config
+│
+├── docs/                       # Documentation
+│   └── reports/                # Audit & verification reports
+│       ├── deployment/         # Deployment reports
+│       ├── verification/       # Verification reports
+│       ├── audit/              # Audit reports
+│       └── frontend/           # Frontend reports
+│
+├── docker-compose.yml          # Docker orchestration
+├── Dockerfile                  # Backend container
+├── render.yaml                 # Render deployment
+├── requirements.txt            # Backend dependencies
+└── README.md                   # This file
 ```
 
-## Setup Instructions
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
-
 - Python 3.11+
-- PostgreSQL 15+
-- Docker & Docker Compose (optional)
+- Node.js 18+
+- PostgreSQL database
+- Git
 
-### Local Development
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd CareerForge
-   ```
-
-2. **Create virtual environment**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Configure environment variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-
-5. **Run database migrations**
-   ```bash
-   alembic upgrade head
-   ```
-
-6. **Start the application**
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-
-7. **Access API documentation**
-   - Swagger UI: http://localhost:8000/docs
-   - ReDoc: http://localhost:8000/redoc
-
-### Using Docker
+### Backend Setup
 
 ```bash
-docker-compose up --build
+# Navigate to backend
+cd backend
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your database URL and secrets
+
+# Run migrations
+alembic upgrade head
+
+# Start server
+uvicorn app.main:app --reload
 ```
 
-The API will be available at http://localhost:8000
+Backend will be available at: http://localhost:8000
+API Docs: http://localhost:8000/docs
 
-## Environment Variables
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
-| `SECRET_KEY` | JWT secret key | Yes |
-| `ALGORITHM` | JWT algorithm (default: HS256) | No |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | Token expiry (default: 30) | No |
-| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name | Yes (for resume upload) |
-| `CLOUDINARY_API_KEY` | Cloudinary API key | Yes (for resume upload) |
-| `CLOUDINARY_API_SECRET` | Cloudinary API secret | Yes (for resume upload) |
-| `SMTP_HOST` | Email SMTP host | No |
-| `SMTP_PORT` | Email SMTP port | No |
-| `SMTP_USER` | Email username | No |
-| `SMTP_PASSWORD` | Email password | No |
-
-## API Endpoints
-
-### Authentication
-- `POST /api/v1/auth/register` - Register new user
-- `POST /api/v1/auth/login` - Login and get tokens
-- `POST /api/v1/auth/refresh` - Refresh access token
-- `GET /api/v1/auth/me` - Get current user info
-
-### Students
-- `POST /api/v1/students/profile` - Create student profile
-- `GET /api/v1/students/profile` - Get student profile
-- `PUT /api/v1/students/profile` - Update student profile
-- `POST /api/v1/students/resume` - Upload resume
-- `GET /api/v1/students/all` - Get all students (admin)
-- `GET /api/v1/students/{id}` - Get student by ID (admin)
-
-### Companies
-- `POST /api/v1/companies` - Create company (admin)
-- `GET /api/v1/companies` - Get all companies
-- `GET /api/v1/companies/{id}` - Get company by ID
-- `PUT /api/v1/companies/{id}` - Update company (admin)
-- `DELETE /api/v1/companies/{id}` - Delete company (admin)
-- `GET /api/v1/companies/search/{name}` - Search companies
-
-### Placement Drives
-- `POST /api/v1/drives` - Create drive (admin)
-- `GET /api/v1/drives` - Get all drives
-- `GET /api/v1/drives/published` - Get published drives
-- `GET /api/v1/drives/{id}` - Get drive by ID
-- `PUT /api/v1/drives/{id}` - Update drive (admin)
-- `POST /api/v1/drives/{id}/publish` - Publish drive (admin)
-- `POST /api/v1/drives/{id}/close` - Close drive (admin)
-- `DELETE /api/v1/drives/{id}` - Delete drive (admin)
-
-### Applications
-- `POST /api/v1/applications` - Apply to drive
-- `GET /api/v1/applications/my-applications` - Get my applications
-- `GET /api/v1/applications/drive/{id}` - Get drive applications (admin)
-- `GET /api/v1/applications/{id}` - Get application by ID
-- `PUT /api/v1/applications/{id}/status` - Update status (admin)
-- `GET /api/v1/applications` - Get all applications (admin)
-
-### Assessments
-- `POST /api/v1/assessments` - Create assessment (admin)
-- `GET /api/v1/assessments` - Get all assessments
-- `GET /api/v1/assessments/{id}` - Get assessment by ID
-- `PUT /api/v1/assessments/{id}` - Update assessment (admin)
-- `DELETE /api/v1/assessments/{id}` - Delete assessment (admin)
-- `POST /api/v1/assessments/{id}/submit` - Submit assessment score
-- `GET /api/v1/assessments/my-scores` - Get my scores
-- `GET /api/v1/assessments/{id}/scores` - Get assessment scores (admin)
-
-### Analytics
-- `GET /api/v1/analytics/overview` - Get overview stats (admin)
-- `GET /api/v1/analytics/top-companies` - Get top hiring companies (admin)
-- `GET /api/v1/analytics/branch-stats` - Get branch-wise stats (admin)
-- `GET /api/v1/analytics/full-report` - Get complete report (admin)
-
-## Deployment
-
-### Render Deployment
-
-1. Connect your GitHub repository to Render
-2. Create a new Web Service
-3. Use the following settings:
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-   - **Environment**: Add all variables from `.env.example`
-
-### Using Docker
+### Frontend Setup
 
 ```bash
-# Build image
-docker build -t careerforge .
+# Navigate to frontend
+cd frontend/careerforge-frontend
 
-# Run container
-docker run -p 8000:8000 \
-  -e DATABASE_URL=postgresql://user:pass@host:5432/careerforge \
-  -e SECRET_KEY=your-secret-key \
-  careerforge
+# Install dependencies
+npm install
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your API URL
+
+# Start development server
+npm run dev
 ```
 
-## Sample Credentials
+Frontend will be available at: http://localhost:5173
 
-After running seed data:
+---
 
-**Admin User:**
-- Email: admin@careerforge.com
-- Password: Admin@123
+## 📚 Documentation
 
-**Student User:**
-- Email: student@careerforge.com
-- Password: Student@123
+### Main Documentation
+- **README.md** - This file (project overview)
+- **docs/deployment/** - Deployment guides
+- **docs/api/** - API specifications
 
-## Testing
+### Reports & Audits
+- **docs/reports/deployment/** - Deployment reports
+- **docs/reports/verification/** - Runtime & functional verification
+- **docs/reports/audit/** - Code audits & analysis
+- **docs/reports/frontend/** - Frontend implementation reports
 
+### Quick Links
+- [Deployment Guide](docs/deployment/RENDER_DEPLOYMENT_GUIDE.md)
+- [API Documentation](https://careerforge-tw8t.onrender.com/docs)
+- [Frontend Repository](https://github.com/yourusername/careerforge-frontend)
+
+---
+
+## 🌐 Deployment
+
+### Live URLs
+- **Backend API**: https://careerforge-tw8t.onrender.com
+- **API Docs**: https://careerforge-tw8t.onrender.com/docs
+- **Frontend**: https://careerforge-frontend.onrender.com (when deployed)
+
+### Deployment Platforms
+- **Backend**: Render (Web Service)
+- **Frontend**: Render (Static Site)
+- **Database**: Neon PostgreSQL
+
+### Environment Variables
+
+#### Backend (.env)
+```env
+DATABASE_URL=postgresql://user:pass@host/db
+SECRET_KEY=your-secret-key
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+BACKEND_CORS_ORIGINS=["http://localhost:5173","https://careerforge-frontend.onrender.com"]
+```
+
+#### Frontend (.env)
+```env
+VITE_API_URL=https://careerforge-tw8t.onrender.com
+VITE_APP_NAME=CareerForge
+```
+
+---
+
+## 🧪 Testing
+
+### Backend Tests
 ```bash
-# Run all tests
+cd backend
 pytest tests/ -v
-
-# Run with coverage
-pytest tests/ -v --cov=app
 ```
 
-## Code Quality
-
+### Frontend Tests
 ```bash
-# Format code
-black .
-
-# Lint code
-ruff check .
-
-# Type checking (optional)
-mypy app/
+cd frontend/careerforge-frontend
+npm run test
 ```
 
-## License
+---
 
-MIT License
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👥 Authors
+
+- **CareerForge Team** - Initial work
+
+---
+
+## 📞 Support
+
+For support, email support@careerforge.com or open an issue in the repository.
+
+---
+
+## 🎯 Roadmap
+
+- [x] Backend API development
+- [x] Frontend development
+- [x] Authentication system
+- [x] Database integration
+- [x] Deployment on Render
+- [ ] Email notifications
+- [ ] Resume parsing
+- [ ] Advanced analytics
+- [ ] Mobile app
+- [ ] Multi-language support
+
+---
+
+## 🙏 Acknowledgments
+
+- FastAPI for the amazing backend framework
+- React and Vite for the frontend tooling
+- Tailwind CSS for the styling framework
+- Render for hosting
+- Neon for PostgreSQL database
+
+---
+
+**Built with ❤️ for CareerForge**
