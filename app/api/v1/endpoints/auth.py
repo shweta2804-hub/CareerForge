@@ -6,6 +6,8 @@ from app.services.auth_service import AuthService
 from app.dependencies.auth import get_current_user
 from app.models.user import User
 from typing import Dict, Any
+import logging
+import os
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -19,6 +21,7 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
     - **password**: Minimum 8 characters
     - **role**: Either 'admin' or 'student'
     """
+    logger = logging.getLogger(__name__)
     try:
         auth_service = AuthService(db)
         result = auth_service.register_user(user_in)
@@ -26,7 +29,14 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Registration failed")
+        logger.error(f"Registration failed: {str(e)}", exc_info=True)
+        detail = "Registration failed"
+        if os.getenv("DEBUG") == "True":
+            detail = f"Registration failed: {str(e)}"
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=detail
+        )
 
 
 @router.post("/login", response_model=Token)

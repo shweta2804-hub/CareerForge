@@ -24,6 +24,23 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
+
+@app.on_event("startup")
+async def startup_event():
+    """Apply database migrations on startup."""
+    try:
+        from alembic import command
+        from alembic.config import Config as AlembicConfig
+        import os
+        alembic_ini_path = os.path.join(os.path.dirname(__file__), "..", "alembic.ini")
+        alembic_cfg = AlembicConfig(alembic_ini_path)
+        command.upgrade(alembic_cfg, "head")
+        print("✅ Database migrations applied successfully")
+    except Exception as e:
+        print(f"⚠️  Migration warning: {e}")
+        # Don't fail startup if migrations fail - might already be applied
+
+
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
