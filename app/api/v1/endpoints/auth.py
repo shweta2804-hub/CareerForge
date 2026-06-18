@@ -30,12 +30,10 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
     except Exception as e:
         logger.error(f"Registration failed: {str(e)}", exc_info=True)
-        detail = "Registration failed"
-        if os.getenv("DEBUG") == "True":
-            detail = f"Registration failed: {str(e)}"
+        # Always return actual error for now to diagnose production issues
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=detail
+            detail=f"Registration failed: {str(e)}"
         )
 
 
