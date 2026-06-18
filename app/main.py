@@ -43,8 +43,8 @@ app.include_router(api_router, prefix="/api/v1")
 
 
 @app.get("/", tags=["Health"])
-def health_check():
-    """Health check endpoint."""
+def root_health():
+    """Root health check endpoint."""
     return {
         "status": "healthy",
         "app": settings.APP_NAME,

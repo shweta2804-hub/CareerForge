@@ -74,11 +74,7 @@ scripts/
 # Tests
 tests/
 
-# Alembic
-alembic/
-alembic.ini
-
-# Docker
+# Docker build files
 docker-compose.yml
 Dockerfile
 .dockerignore

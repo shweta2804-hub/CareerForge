@@ -51,7 +51,7 @@ jobs:
           pip install pytest pytest-asyncio
       - name: Run tests
         env:
-          DATABASE_URL: postgresql://careerforge:careerforge123@localhost:5432/careerforge_test
+          DATABASE_URL: postgresql+psycopg://careerforge:careerforge123@localhost:5432/careerforge_test
           SECRET_KEY: test-secret-key
         run: pytest tests/ -v
 

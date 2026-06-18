@@ -26,7 +26,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://careerforge:careerforge123@postgres:5432/careerforge
+      - DATABASE_URL=postgresql+psycopg://careerforge:careerforge123@postgres:5432/careerforge
       - SECRET_KEY=your-secret-key-here-change-in-production
       - DEBUG=True
       - CLOUDINARY_CLOUD_NAME=your-cloud-name

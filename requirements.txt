@@ -21,13 +21,3 @@ cloudinary==1.44.2
 
 # Email
 fastapi-mail==1.4.1
-
-# Testing
-pytest==7.4.4
-pytest-asyncio==0.23.4
-httpx==0.26.0
-
-# Code Quality
-ruff==0.3.0
-black==24.2.0
-
