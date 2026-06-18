@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: careerforge-frontend
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: VITE_API_URL
+        value: https://careerforge-tw8t.onrender.com
+      - key: VITE_APP_NAME
+        value: CareerForge
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
